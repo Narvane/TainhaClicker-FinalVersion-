@@ -7,20 +7,15 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import connection.Conexão;
+
 public class PraiaDAO {
 private Connection conexao;
 
-	
-	public PraiaDAO() throws SQLException {	
-		String urlDoBanco = "jdbc:mysql://localhost:3306/TainhaClickerDB?useSSL=false";
-		String usuarioDoBanco = "root";
-		String senhaDoBanco = "root";
-		this.conexao = DriverManager.getConnection(urlDoBanco, usuarioDoBanco, senhaDoBanco);
-		System.out.println("Conexao: " + this.conexao);
-	}
 	public void logarPraiasDoJogo(ArrayList<Praia> praiasDoJogo) {
 		String sql = "SELECT * FROM Praia order by idpraia";
 		try {
+			conexao = Conexão.faz_conexão();
 			PreparedStatement comando = conexao.prepareStatement(sql);
 			ResultSet rs = comando.executeQuery();
 			
@@ -31,6 +26,9 @@ private Connection conexao;
 				p.setXpmin(rs.getInt("xpnesc"));
 				praiasDoJogo.add(p);
 			}
+			conexao.close();
+			comando.close();
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

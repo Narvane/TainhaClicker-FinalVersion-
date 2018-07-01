@@ -1,6 +1,7 @@
 package jogo;
 
 public class XpBar {
+	private int id;
 	private int xp1;
 	private int xp2;
 	//construtor
@@ -32,4 +33,11 @@ public class XpBar {
 	public void setXp2(int xp2) {
 		this.xp2 = xp2;
 	}
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 }

@@ -8,20 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import connection.Conexão;
+
 public class VaraDAO {
 	private Connection conexao;
 
-	
-	public VaraDAO() throws SQLException {	
-		String urlDoBanco = "jdbc:mysql://localhost:3306/TainhaClickerDB?useSSL=false";
-		String usuarioDoBanco = "root";
-		String senhaDoBanco = "root";
-		this.conexao = DriverManager.getConnection(urlDoBanco, usuarioDoBanco, senhaDoBanco);
-		System.out.println("Conexao: " + this.conexao);
-	}
 	public void logarVarasDoJogo(ArrayList<Vara> varasDoJogo) {
 		String sql = "SELECT * FROM Vara order by idvara";
 		try {
+			conexao = Conexão.faz_conexão();
 			PreparedStatement comando = conexao.prepareStatement(sql);
 			ResultSet rs = comando.executeQuery();
 			
@@ -33,6 +28,9 @@ public class VaraDAO {
 				v.setPreco(rs.getInt("precovara"));
 				varasDoJogo.add(v);
 			}
+			conexao.close();
+			comando.close();
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

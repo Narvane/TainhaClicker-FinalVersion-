@@ -8,21 +8,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import connection.Conexão;
+
 
 public class MolineteDAO {
 private Connection conexao;
 
-	
-	public MolineteDAO() throws SQLException {	
-		String urlDoBanco = "jdbc:mysql://localhost:3306/TainhaClickerDB?useSSL=false";
-		String usuarioDoBanco = "root";
-		String senhaDoBanco = "root";
-		this.conexao = DriverManager.getConnection(urlDoBanco, usuarioDoBanco, senhaDoBanco);
-		System.out.println("Conexao: " + this.conexao);
-	}
 	public void logarMolinetesDoJogo(ArrayList<Molinete> molinetesDoJogo) {
 		String sql = "SELECT * FROM Molinete order by idmolinete";
 		try {
+			conexao = Conexão.faz_conexão();
 			PreparedStatement comando = conexao.prepareStatement(sql);
 			ResultSet rs = comando.executeQuery();
 			
@@ -34,6 +29,9 @@ private Connection conexao;
 				m.setPreco(rs.getInt("precomolinete"));
 				molinetesDoJogo.add(m);
 			}
+			conexao.close();
+			comando.close();
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

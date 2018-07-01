@@ -7,22 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import connection.Conexão;
+
 public class SamburaDAO {
 private Connection conexao;
 
-	
-	public SamburaDAO() throws SQLException {	
-		String urlDoBanco = "jdbc:mysql://localhost:3306/TainhaClickerDB?useSSL=false";
-		String usuarioDoBanco = "root";
-		String senhaDoBanco = "root";
-		this.conexao = DriverManager.getConnection(urlDoBanco, usuarioDoBanco, senhaDoBanco);
-		System.out.println("Conexao: " + this.conexao);
-	}
+
 	public void logarPeixesNoBalaio(ArrayList<Peixe> peixesDoJogo,Pescador p) {
 		String sql = "SELECT peixesdobalaio.idBalaio, peixesdobalaio.idPeixe FROM pescador join peixesdobalaio on (peixesdobalaio.idBalaio = pescador.idBalaio) where idPescador=?;\r\n" + 
 				"\r\n" + 
 				"";
 		try {
+			conexao = Conexão.faz_conexão();
 			PreparedStatement comando = conexao.prepareStatement(sql);
 			comando.setInt(1, p.getId());
 			ResultSet rs = comando.executeQuery();
@@ -35,6 +31,9 @@ private Connection conexao;
 					}
 				}
 			}
+			conexao.close();
+			comando.close();
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

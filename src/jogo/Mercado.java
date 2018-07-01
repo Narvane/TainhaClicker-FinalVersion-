@@ -16,17 +16,13 @@ public class Mercado {
 		MolinetesDoMercado = new ArrayList<>();
 		IscasDoMercado = new ArrayList<>();
 		
-		try {
-			VaraDAO varadao = new VaraDAO();
-			MolineteDAO molinetedao = new MolineteDAO();
-			IscaDAO iscadao = new IscaDAO();
-			
-			varadao.logarVarasDoJogo(VarasDoMercado);
-			molinetedao.logarMolinetesDoJogo(MolinetesDoMercado);
-			iscadao.logarIscasDoJogo(IscasDoMercado);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		VaraDAO varadao = new VaraDAO();
+		MolineteDAO molinetedao = new MolineteDAO();
+		IscaDAO iscadao = new IscaDAO();
+		
+		varadao.logarVarasDoJogo(VarasDoMercado);
+		molinetedao.logarMolinetesDoJogo(MolinetesDoMercado);
+		iscadao.logarIscasDoJogo(IscasDoMercado);
 	}
 	//Metodos principais
 	

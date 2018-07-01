@@ -93,27 +93,23 @@ public class ViewLogin extends JFrame {
 		JButton btnLogar = new JButton("Logar");
 		btnLogar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try {
-					Pescador Pescador = new Pescador();
-					Mercado Mercado = new Mercado();
-					Mundo Mundo = new Mundo();
-					
-					PescadorDAO pdao = new PescadorDAO();
-					
-					
-					Pescador.setNome(textField.getText());
-					Pescador.setSenha(passField.getText());
-					
-					
-					pdao.LogarPescador(Pescador, Mercado, Mundo);
-					if(pdao.Acesso) {
-						ViewGame VG = new ViewGame(Pescador, Mercado, Mundo);
-						VG.setVisible(true);
-						//setVisible(false);
-						System.out.println(Pescador.getPraiaAtual().getNome());
-					}
-				} catch (SQLException e) {
-					e.printStackTrace();
+				Pescador Pescador = new Pescador();
+				Mercado Mercado = new Mercado();
+				Mundo Mundo = new Mundo();
+				
+				PescadorDAO pdao = new PescadorDAO();
+				
+				
+				Pescador.setNome(textField.getText());
+				Pescador.setSenha(passField.getText());
+				
+				
+				pdao.LogarPescador(Pescador, Mercado, Mundo);
+				if(pdao.Acesso) {
+					ViewGame VG = new ViewGame(Pescador, Mercado, Mundo);
+					VG.setVisible(true);
+					setVisible(false);
+					System.out.println(Pescador.getPraiaAtual().getNome());
 				}
 			}
 		});
@@ -152,21 +148,12 @@ public class ViewLogin extends JFrame {
 				Jogo.Pescador.setNome(cadTextField.getText());
 				Jogo.Pescador.setSenha(cadPassField.getText());
 				if(Arrays.equals(cadPassField.getPassword(), cfCadPassField.getPassword())) {
-					try {
-						MundoDAO gameDAO = new MundoDAO();
-						
-						//Jogo.Pescador.setVara(Jogo.GetVaraDoMercado(0));
-						//Jogo.Pescador.setDinheiro(0);
-						//Jogo.Pescador.setMolinete(Jogo.GetMolineteDoMercado(0));
-						//Jogo.Pescador.setIsca(Jogo.GetIscaDoMercado(0));
-						//Jogo.Pescador.setPraiaAtual(Jogo.GetPraiasDoJogo(0));
-						//Jogo.Pescador.setScore(0);
-						
-						//gameDAO.CadastrarPescador();
-					} catch (SQLException e) {
-						e.printStackTrace();
-						JOptionPane.showMessageDialog(contentPane, "Usuário já existente ou falha na conexão!");
-					}
+					Pescador p = new Pescador();
+					p.setNome(cadTextField.getText());
+					p.setSenha(cadPassField.getText());
+					
+					PescadorDAO pdao = new PescadorDAO();
+					pdao.CadastrarPescador(p);
 				}else {
 					JOptionPane.showMessageDialog(contentPane,"Senhas não coincidem!");
 				}

@@ -8,20 +8,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import connection.Conexão;
+
 public class IscaDAO {
 		private Connection conexao;
 
-		
-		public IscaDAO() throws SQLException {	
-			String urlDoBanco = "jdbc:mysql://localhost:3306/TainhaClickerDB?useSSL=false";
-			String usuarioDoBanco = "root";
-			String senhaDoBanco = "root";
-			this.conexao = DriverManager.getConnection(urlDoBanco, usuarioDoBanco, senhaDoBanco);
-			System.out.println("Conexao: " + this.conexao);
-		}
 		public void logarIscasDoJogo(ArrayList<Isca> iscasDoJogo) {
+			
 			String sql = "SELECT * FROM Isca order by idisca";
 			try {
+				conexao = Conexão.faz_conexão();
 				PreparedStatement comando = conexao.prepareStatement(sql);
 				ResultSet rs = comando.executeQuery();
 				
@@ -33,6 +29,9 @@ public class IscaDAO {
 					i.setPreco(rs.getInt("precoIsca"));
 					iscasDoJogo.add(i);
 				}
+				conexao.close();
+				comando.close();
+				rs.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
