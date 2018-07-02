@@ -37,6 +37,7 @@ import connection.Conexão;
 import jogo.Mundo;
 import jogo.Pescador;
 import jogo.PescadorDAO;
+import musica.TocarMp3;
 import jogo.Mercado;
 
 
@@ -48,6 +49,7 @@ import javax.swing.JCheckBox;
 import javax.swing.border.LineBorder;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import javax.swing.JSeparator;
 
 @SuppressWarnings("serial")
 public class ViewGame extends JFrame{
@@ -124,8 +126,6 @@ public class ViewGame extends JFrame{
 	private JLabel lblIsca3;
 	private JLabel lblIsca4;
 	private JLabel lblIsca5;
-	//=========
-	private JLabel lblAprimorarS;
 	private JButton btnAprimorarS;
 	private JLabel ImagemPeixe;
 	private JButton btnFisgar;
@@ -167,6 +167,10 @@ public class ViewGame extends JFrame{
 	private JButton btnPraia3;
 	private JButton btnPraia4;
 	private JButton btnPraia5;
+	private JLabel lblVaraatuallbl;
+	private JLabel lblMolineteatuallbl;
+	private JLabel lblIscaatuallbl;
+	private JButton btnVenderPeixes;
 	/**
 	 * Launch the application.
 	 */
@@ -223,187 +227,455 @@ public class ViewGame extends JFrame{
 		mercado.Cliente = Pescador;
 		mundo.Pescador = Pescador;
 		
-		Mercado = new JPanel();
-		Mercado.setBackground(new Color(153, 153, 51));
-		Mercado.setForeground(new Color(255, 255, 255));
-		Mercado.setVisible(false);
-		
-		Pescaria = new JPanel();
-		Pescaria.setVisible(false);
-		
 		
 		
 		System.out.println(mundo.PraiasDoJogo);
+		
+		Mercado = new JPanel();
+		Mercado.setBackground(new Color(189, 183, 107));
+		Mercado.setForeground(new Color(255, 255, 255));
+		Mercado.setVisible(false);
 		
 		Praias = new JPanel();
 		Praias.setBackground(new Color(189, 183, 107));
 		Praias.setVisible(false);
 		
 		Sambura = new JPanel();
-		Sambura.setBackground(new Color(153, 153, 51));
+		Sambura.setBackground(new Color(189, 183, 107));
 		Sambura.setVisible(false);
 		
 		Ranking = new JPanel();
-		Ranking.setBackground(new Color(153, 153, 51));
+		Ranking.setBackground(new Color(189, 183, 107));
 		Ranking.setVisible(false);
-		
-		Home = new JPanel();
-		Home.setVisible(true);
-		Home.setBackground(new Color(189, 183, 107));
-		Home.setForeground(new Color(255, 255, 255));
-		Home.setBounds(0, 0, 606, 429);
-		contentPane.add(Home);
-		Home.setLayout(null);
-		
-			
-			JButton btnPescar = new JButton("Pescar");
-			btnPescar.setForeground(Color.WHITE);
-			btnPescar.setFont(new Font("Super Mario Bros.", Font.PLAIN, 18));
-			btnPescar.setHorizontalAlignment(SwingConstants.LEFT);
-			btnPescar.setBorderPainted(false);
-			btnPescar.setOpaque(false);
-			btnPescar.setBackground(new Color(135, 206, 250));
-			btnPescar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					AbrirPraias();
-					Atualizar();
-				}
-			});
-			btnPescar.setBounds(12, 158, 207, 28);
-			Home.add(btnPescar);
-			
-			JButton btnSambura = new JButton("Sambur\u00E1");
-			btnSambura.setHorizontalAlignment(SwingConstants.LEFT);
-			btnSambura.setForeground(new Color(255, 255, 255));
-			btnSambura.setFont(new Font("Super Mario Bros.", Font.PLAIN, 18));
-			btnSambura.setBackground(new Color(173, 216, 230));
-			btnSambura.setOpaque(false);
-			btnSambura.setBorderPainted(false);
-			btnSambura.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					Atualizar();
-					AbrirSambura();
-					
-				}
-			});
-			btnSambura.setBounds(12, 199, 207, 28);
-			Home.add(btnSambura);
-			
-			JButton btnMercado = new JButton("Mercado");
-			btnMercado.setForeground(new Color(255, 255, 255));
-			btnMercado.setFont(new Font("Super Mario Bros.", Font.PLAIN, 18));
-			btnMercado.setBorderPainted(false);
-			btnMercado.setHorizontalAlignment(SwingConstants.LEFT);
-			btnMercado.setBackground(new Color(173, 216, 230));
-			btnMercado.setOpaque(false);
-			btnMercado.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					AbrirMercado();
-				}
-			});
-			btnMercado.setBounds(12, 237, 207, 28);
-			Home.add(btnMercado);
-			
-			JLabel lblTainhaClicker = new JLabel("Tainha Clicker");
-			lblTainhaClicker.setForeground(new Color(0, 0, 0));
-			lblTainhaClicker.setFont(new Font("Chlorinap", Font.BOLD, 31));
-			lblTainhaClicker.setBounds(12, 67, 299, 65);
-			Home.add(lblTainhaClicker);
-			
-			JButton btnRanking = new JButton("Ranking");
-			btnRanking.setForeground(new Color(255, 255, 255));
-			btnRanking.setFont(new Font("Super Mario Bros.", Font.PLAIN, 18));
-			btnRanking.setBorderPainted(false);
-			btnRanking.setHorizontalAlignment(SwingConstants.LEFT);
-			btnRanking.setBackground(new Color(250, 250, 210));
-			btnRanking.setOpaque(false);
-			btnRanking.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent arg0) {
-					AbrirRanking();
-					Atualizar();
-				}
-			});
-			btnRanking.setBounds(12, 278, 207, 28);
-			Home.add(btnRanking);
-			
-			JLabel lblL = new JLabel("l");
-			lblL.setIcon(new ImageIcon(ViewGame.class.getResource("/Imagens/CoolClips_vc019674.png")));
-			lblL.setBounds(128, 60, 561, 416);
-			Home.add(lblL);
-		
-		Hud = new JPanel();
-		Hud.setOpaque(false);
-		Hud.setBackground(new Color(204, 153, 51));
-		Hud.setVisible(false);
-		Hud.setBounds(12, 12, 582, 59);
-		contentPane.add(Hud);
-		Hud.setLayout(null);
-		
-		lblPescHud = new JLabel("Pescador");
-		lblPescHud.setForeground(new Color(102, 51, 0));
-		lblPescHud.setBackground(new Color(255, 255, 255));
-		lblPescHud.setFont(new Font("Lucida Sans", Font.BOLD, 16));
-		lblPescHud.setBounds(12, 12, 181, 16);
-		Hud.add(lblPescHud);
-		
-		lblDinheiroHub = new JLabel("Dinheiro");
-		lblDinheiroHub.setForeground(new Color(102, 51, 0));
-		lblDinheiroHub.setFont(new Font("Lucida Sans", Font.PLAIN, 12));
-		lblDinheiroHub.setBounds(22, 31, 171, 16);
-		Hud.add(lblDinheiroHub);
-		
-		lblScoreHud = new JLabel("Score");
-		lblScoreHud.setForeground(new Color(102, 51, 0));
-		lblScoreHud.setFont(new Font("Lucida Sans", Font.PLAIN, 16));
-		lblScoreHud.setBounds(438, 12, 132, 16);
-		Hud.add(lblScoreHud);
-		
-		lblXpHub = new JLabel("Xp");
-		lblXpHub.setFont(new Font("Lucida Sans", Font.PLAIN, 18));
-		lblXpHub.setForeground(new Color(102, 51, 0));
-		lblXpHub.setBounds(230, 12, 122, 35);
-		Hud.add(lblXpHub);
-		
-		lblSamburaHud = new JLabel("Sambur\u00E1");
-		lblSamburaHud.setForeground(new Color(102, 51, 0));
-		lblSamburaHud.setFont(new Font("Lucida Sans", Font.PLAIN, 12));
-		lblSamburaHud.setBounds(448, 31, 122, 16);
-		Hud.add(lblSamburaHud);
-		
-		MiniSambura = new JPanel();
-		MiniSambura.setBackground(new Color(153, 153, 51));
-		MiniSambura.setVisible(false);
-		MiniSambura.setBounds(12, 137, 199, 231);
-		contentPane.add(MiniSambura);
-		MiniSambura.setLayout(null);
-		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(12, 12, 175, 180);
-		MiniSambura.add(scrollPane_2);
-		
-		list = new JList();
-		scrollPane_2.setViewportView(list);
-		
-		JButton btnFechar = new JButton("Fechar");
-		btnFechar.setFont(new Font("Super Mario Bros.", Font.PLAIN, 18));
-		btnFechar.setForeground(new Color(102, 51, 0));
-		btnFechar.setOpaque(false);
-		btnFechar.setBackground(new Color(102, 51, 0));
-		btnFechar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+				
+				MiniSambura = new JPanel();
+				MiniSambura.setBorder(new LineBorder(new Color(51, 51, 0)));
+				MiniSambura.setBackground(new Color(189, 183, 107));
 				MiniSambura.setVisible(false);
-			}
-		});
-		btnFechar.setBounds(42, 193, 113, 26);
-		MiniSambura.add(btnFechar);
+				
+				Home = new JPanel();
+				Home.setVisible(true);
+				
+				Pescaria = new JPanel();
+				Pescaria.setVisible(false);
+				
+						Pescaria.setBounds(0, 0, 606, 429);
+						contentPane.add(Pescaria);
+						Pescaria.setLayout(null);
+						
+						JButton btnArremessar = new JButton("Arremessar");
+						btnArremessar.setForeground(new Color(51, 51, 0));
+						btnArremessar.setFont(new Font("Super Mario 256", Font.PLAIN, 16));
+						btnArremessar.setBackground(new Color(153, 153, 51));
+						btnArremessar.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+									new Thread(new Runnable() {
+										   public void run() {
+										    try {
+										    btnArremessar.setEnabled(false);
+										    
+										   
+										    lblArremesse.setText("Arremessando...");
+										     Thread.sleep(Pescador.getVara().getTempoDeArremesso()); //vara 
+										     lblArremesse.setText("Esperando...");
+										     Thread.sleep(Pescador.getIsca().getTempoDeEspera());
+										     lblArremesse.setText("Fisque!");
+										 	if(chckbxComoPuxar.isSelected()) {
+										 		lblTutorial.setVisible(true);
+												lblTutorial.setText("<html>Para puxar, clique nas teclas Cima e Baixo do seu teclado alternadamente ate o peixer vir.<html>");
+											}
+											    btnFisgar.setEnabled(true);
+											    Pescador.puxar();
+											    
+										    } catch (InterruptedException e) {
+										     e.printStackTrace();
+										    }
+										   }
+										  }).start();	
+								}
+										});
+						
+						btnArremessar.setBounds(221, 241, 153, 51);
+						Pescaria.add(btnArremessar);
+						
+						btnPegarPeixe = new JButton("Pegar Peixe");
+						btnPegarPeixe.setFont(new Font("Jokerman", Font.PLAIN, 12));
+						btnPegarPeixe.setForeground(UIManager.getColor("Button.foreground"));
+						btnPegarPeixe.setBackground(UIManager.getColor("Button.darkShadow"));
+						btnPegarPeixe.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								btnArremessar.setEnabled(true);
+								lblArremesse.setText("Arremesse!");
+								btnPegarPeixe.setEnabled(false);
+								btnJogarNaAgua.setEnabled(false);
+								Pescador.PegarPeixe();
+								Atualizar();
+							}
+						});
+						btnPegarPeixe.setEnabled(false);
+						btnPegarPeixe.setBounds(305, 335, 117, 39);
+						Pescaria.add(btnPegarPeixe);
+						
+						btnJogarNaAgua = new JButton("Jogar na agua");
+						btnJogarNaAgua.setForeground(UIManager.getColor("Button.foreground"));
+						btnJogarNaAgua.setFont(new Font("Jokerman", Font.PLAIN, 12));
+						btnJogarNaAgua.setBackground(UIManager.getColor("Button.darkShadow"));
+						btnJogarNaAgua.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								btnArremessar.setEnabled(true);
+								lblArremesse.setText("Arremesse!");
+								btnPegarPeixe.setEnabled(false);
+								btnJogarNaAgua.setEnabled(false);
+								Pescador.JogarPeixeFora();
+								Atualizar();
+							}
+						});
+						btnJogarNaAgua.setEnabled(false);
+						btnJogarNaAgua.setBounds(175, 335, 117, 39);
+						Pescaria.add(btnJogarNaAgua);
+						
+						JButton btnSambur = new JButton("Balaio");
+						btnSambur.setBackground(new Color(153, 153, 51));
+						btnSambur.setForeground(new Color(51, 51, 0));
+						btnSambur.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+						btnSambur.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								AbrirMiniSambura();
+								Atualizar();
+							}
+						});
+						btnSambur.setBounds(33, 92, 90, 33);
+						Pescaria.add(btnSambur);
+						
+						JButton btnSairDaPraia = new JButton("Sair da praia");
+						btnSairDaPraia.setForeground(new Color(51, 51, 0));
+						btnSairDaPraia.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+						btnSairDaPraia.setBackground(new Color(153, 153, 51));
+						btnSairDaPraia.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								AbrirHome();
+							}
+						});
+						btnSairDaPraia.setBounds(8, 380, 123, 26);
+						Pescaria.add(btnSairDaPraia);
+						
+						lblPraiaAtual = new JLabel("New label");
+						lblPraiaAtual.setHorizontalAlignment(SwingConstants.CENTER);
+						lblPraiaAtual.setForeground(new Color(255, 255, 255));
+						lblPraiaAtual.setFont(new Font("Super Mario Bros.", Font.PLAIN, 32));
+						lblPraiaAtual.setBounds(152, 67, 278, 59);
+						Pescaria.add(lblPraiaAtual);
+						
+						lblPeixePescado = new JLabel("NomePeixe");
+						lblPeixePescado.setForeground(new Color(0, 0, 0));
+						lblPeixePescado.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
+						lblPeixePescado.setBounds(301, 202, 178, 16);
+						Pescaria.add(lblPeixePescado);
+						
+						ImagemPeixe = new JLabel("ImagemPeixe");
+						ImagemPeixe.setBounds(193, 189, 90, 44);
+						Pescaria.add(ImagemPeixe);
+						
+						btnFisgar = new JButton("Fisgar");
+						btnFisgar.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent arg0) {
+								lblArremesse.setText("Puxe!");
+							}
+						});
+						btnFisgar.setForeground(UIManager.getColor("Button.foreground"));
+						btnFisgar.setFont(new Font("Jokerman", Font.PLAIN, 14));
+						btnFisgar.setBackground(UIManager.getColor("Button.darkShadow"));
+						btnFisgar.addKeyListener(new KeyAdapter() {
+							@Override
+							public void keyReleased(KeyEvent e) {
+								if(e.getKeyCode() == 38) {
+									x++;
+									if(x == 2) {
+										x=1;
+										
+									}
+								}
+								if(e.getKeyCode() == 40) {
+									y++;
+									if(y == 2) {
+										y=1;
+									}
+								}
+								if(x == 1 && y ==1) {
+									z++;
+									x = 0;
+									y = 0;
+									if(z == Pescador.getMolinete().getTempoDePuxe()) {
+										z = 0;
+										lblTutorial.setVisible(false);
+											Pescador.puxar();
+										if (Pescador.getSambura().getEspaco() != Pescador.getSambura().QuantidadePeixe()) {
+											btnPegarPeixe.setEnabled(true);
+										}else {
+											btnPegarPeixe.setEnabled(false);
+										}
+										btnJogarNaAgua.setEnabled(true);
+										lblTutorial.setText("");
+										Atualizar();
+										
+										btnFisgar.setEnabled(false);
+									}
+								}
+							}
+						});
+						btnFisgar.setEnabled(false);
+						btnFisgar.setBounds(247, 297, 98, 33);
+						Pescaria.add(btnFisgar);
+						
+						chckbxComoPuxar = new JCheckBox("Como puxar");
+						chckbxComoPuxar.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+						chckbxComoPuxar.setOpaque(false);
+						chckbxComoPuxar.setSelected(true);
+						chckbxComoPuxar.setBounds(488, 381, 112, 24);
+						Pescaria.add(chckbxComoPuxar);
+						
+						lblTutorial = new JLabel("");
+						lblTutorial.setVisible(false);
+						lblTutorial.setBackground(new Color(255, 255, 204));
+						lblTutorial.setBorder(new LineBorder(new Color(102, 51, 0)));
+						lblTutorial.setOpaque(true);
+						lblTutorial.setForeground(new Color(128, 0, 0));
+						lblTutorial.setFont(new Font("Super Mario 256", Font.PLAIN, 14));
+						lblTutorial.setHorizontalTextPosition(SwingConstants.LEADING);
+						lblTutorial.setHorizontalAlignment(SwingConstants.LEFT);
+						lblTutorial.setVerticalAlignment(SwingConstants.TOP);
+						lblTutorial.setBounds(432, 243, 143, 131);
+						Pescaria.add(lblTutorial);
+						
+						lblMiniVara = new JLabel("New label");
+						lblMiniVara.setBounds(520, 92, 55, 51);
+						Pescaria.add(lblMiniVara);
+						
+						lblMiniMol = new JLabel("New label");
+						lblMiniMol.setBounds(520, 139, 55, 51);
+						Pescaria.add(lblMiniMol);
+						
+						lblMiniIsca = new JLabel("New label");
+						lblMiniIsca.setBounds(520, 187, 55, 51);
+						Pescaria.add(lblMiniIsca);
+						
+						JLabel lblNewLabel_4 = new JLabel("");
+						lblNewLabel_4.setIcon(new ImageIcon(ViewGame.class.getResource("/Imagens/placa2.png")));
+						lblNewLabel_4.setVerticalAlignment(SwingConstants.TOP);
+						lblNewLabel_4.setBackground(new Color(139, 69, 19));
+						lblNewLabel_4.setBounds(142, 1, 305, 158);
+						Pescaria.add(lblNewLabel_4);
+						lblArremesse.setBorder(new LineBorder(new Color(102, 51, 0)));
+						lblArremesse.setOpaque(true);
+						lblArremesse.setHorizontalAlignment(SwingConstants.CENTER);
+						lblArremesse.setForeground(new Color(0, 0, 153));
+						lblArremesse.setFont(new Font("Chiller", Font.BOLD, 32));
+						
+						
+						lblArremesse.setBounds(175, 125, 232, 33);
+						Pescaria.add(lblArremesse);
+						Pescaria.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnSairDaPraia, btnArremessar, btnPegarPeixe, lblArremesse, btnJogarNaAgua, btnSambur, lblPraiaAtual, lblPeixePescado}));
+						
+						label = new JLabel("");
+						label.setBorder(new LineBorder(new Color(102, 51, 0)));
+						label.setOpaque(true);
+						label.setHorizontalAlignment(SwingConstants.CENTER);
+						label.setBounds(183, 187, 215, 51);
+						Pescaria.add(label);
+						
+						
+						
+						lblLblfundo = new JLabel("");
+						lblLblfundo.setBounds(0, 0, 600, 429);
+						Pescaria.add(lblLblfundo);
+				Home.setBackground(new Color(189, 183, 107));
+				Home.setForeground(new Color(255, 255, 255));
+				Home.setBounds(0, 0, 606, 429);
+				contentPane.add(Home);
+				Home.setLayout(null);
+				
+					
+					JButton btnPescar = new JButton("Pescar");
+					btnPescar.setForeground(Color.WHITE);
+					btnPescar.setFont(new Font("Super Mario 256", Font.PLAIN, 18));
+					btnPescar.setHorizontalAlignment(SwingConstants.LEFT);
+					btnPescar.setBorderPainted(false);
+					btnPescar.setOpaque(false);
+					btnPescar.setBackground(new Color(135, 206, 250));
+					btnPescar.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							AbrirPraias();
+							Atualizar();
+						}
+					});
+					btnPescar.setBounds(12, 158, 207, 28);
+					Home.add(btnPescar);
+					
+					JButton btnSambura = new JButton("Balaio");
+					btnSambura.setHorizontalAlignment(SwingConstants.LEFT);
+					btnSambura.setForeground(new Color(255, 255, 255));
+					btnSambura.setFont(new Font("Super Mario 256", Font.PLAIN, 18));
+					btnSambura.setBackground(new Color(173, 216, 230));
+					btnSambura.setOpaque(false);
+					btnSambura.setBorderPainted(false);
+					btnSambura.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							Atualizar();
+							AbrirSambura();
+							
+						}
+					});
+					btnSambura.setBounds(12, 199, 207, 28);
+					Home.add(btnSambura);
+					
+					JButton btnMercado = new JButton("Mercado");
+					btnMercado.setForeground(new Color(255, 255, 255));
+					btnMercado.setFont(new Font("Super Mario 256", Font.PLAIN, 18));
+					btnMercado.setBorderPainted(false);
+					btnMercado.setHorizontalAlignment(SwingConstants.LEFT);
+					btnMercado.setBackground(new Color(173, 216, 230));
+					btnMercado.setOpaque(false);
+					btnMercado.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							AbrirMercado();
+							Atualizar();
+						}
+					});
+					btnMercado.setBounds(12, 237, 207, 28);
+					Home.add(btnMercado);
+					
+					JLabel lblTainhaClicker = new JLabel("Tainha Clicker");
+					lblTainhaClicker.setForeground(new Color(102, 51, 0));
+					lblTainhaClicker.setFont(new Font("Super Mario 256", Font.BOLD, 31));
+					lblTainhaClicker.setBounds(12, 67, 299, 65);
+					Home.add(lblTainhaClicker);
+					
+					JButton btnRanking = new JButton("Ranking");
+					btnRanking.setForeground(new Color(255, 255, 255));
+					btnRanking.setFont(new Font("Super Mario 256", Font.PLAIN, 18));
+					btnRanking.setBorderPainted(false);
+					btnRanking.setHorizontalAlignment(SwingConstants.LEFT);
+					btnRanking.setBackground(new Color(250, 250, 210));
+					btnRanking.setOpaque(false);
+					btnRanking.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							AbrirRanking();
+							Atualizar();
+						}
+					});
+					btnRanking.setBounds(12, 278, 207, 28);
+					Home.add(btnRanking);
+					
+					JLabel lblL = new JLabel("l");
+					lblL.setIcon(new ImageIcon(ViewGame.class.getResource("/Imagens/CoolClips_vc019674.png")));
+					lblL.setBounds(128, 60, 561, 416);
+					Home.add(lblL);
+					
+					JButton btnOn = new JButton("ON");
+					btnOn.setForeground(new Color(153, 51, 0));
+					btnOn.setOpaque(false);
+					btnOn.setBackground(new Color(153, 153, 51));
+					btnOn.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+					btnOn.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							TocarMp3 tc = new TocarMp3();
+							tc.Play();
+						}
+					});
+					btnOn.setBounds(12, 395, 64, 23);
+					Home.add(btnOn);
+					
+					JButton btnOff = new JButton("OFF");
+					btnOff.setForeground(new Color(153, 51, 0));
+					btnOff.setOpaque(false);
+					btnOff.setBackground(new Color(153, 153, 51));
+					btnOff.addActionListener(new ActionListener() {
+						public void actionPerformed(ActionEvent arg0) {
+							
+						}
+					});
+					btnOff.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+					btnOff.setBounds(78, 395, 64, 23);
+					Home.add(btnOff);
+					
+					JLabel lblMsica = new JLabel("Musica");
+					lblMsica.setForeground(new Color(255, 255, 255));
+					lblMsica.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+					lblMsica.setHorizontalAlignment(SwingConstants.CENTER);
+					lblMsica.setBounds(12, 378, 130, 14);
+					Home.add(lblMsica);
+				
+				Hud = new JPanel();
+				Hud.setOpaque(false);
+				Hud.setBackground(new Color(204, 153, 51));
+				Hud.setVisible(false);
+				Hud.setBounds(12, 12, 582, 59);
+				contentPane.add(Hud);
+				Hud.setLayout(null);
+				
+				lblPescHud = new JLabel("Pescador");
+				lblPescHud.setForeground(new Color(102, 51, 0));
+				lblPescHud.setBackground(new Color(255, 255, 255));
+				lblPescHud.setFont(new Font("Lucida Sans", Font.BOLD, 16));
+				lblPescHud.setBounds(12, 12, 181, 16);
+				Hud.add(lblPescHud);
+				
+				lblDinheiroHub = new JLabel("Dinheiro");
+				lblDinheiroHub.setForeground(new Color(102, 51, 0));
+				lblDinheiroHub.setFont(new Font("Lucida Sans", Font.PLAIN, 12));
+				lblDinheiroHub.setBounds(22, 31, 171, 16);
+				Hud.add(lblDinheiroHub);
+				
+				lblScoreHud = new JLabel("Score");
+				lblScoreHud.setForeground(new Color(102, 51, 0));
+				lblScoreHud.setFont(new Font("Lucida Sans", Font.PLAIN, 16));
+				lblScoreHud.setBounds(438, 12, 132, 16);
+				Hud.add(lblScoreHud);
+				
+				lblXpHub = new JLabel("Xp");
+				lblXpHub.setFont(new Font("Lucida Sans", Font.PLAIN, 18));
+				lblXpHub.setForeground(new Color(102, 51, 0));
+				lblXpHub.setBounds(230, 12, 122, 35);
+				Hud.add(lblXpHub);
+				
+				lblSamburaHud = new JLabel("Sambur\u00E1");
+				lblSamburaHud.setForeground(new Color(102, 51, 0));
+				lblSamburaHud.setFont(new Font("Lucida Sans", Font.PLAIN, 12));
+				lblSamburaHud.setBounds(448, 31, 122, 16);
+				Hud.add(lblSamburaHud);
+				MiniSambura.setBounds(12, 137, 199, 231);
+				contentPane.add(MiniSambura);
+				MiniSambura.setLayout(null);
+				
+				JScrollPane scrollPane_2 = new JScrollPane();
+				scrollPane_2.setBounds(12, 12, 175, 180);
+				MiniSambura.add(scrollPane_2);
+				
+				list = new JList();
+				scrollPane_2.setViewportView(list);
+				
+				JButton btnFechar = new JButton("Fechar");
+				btnFechar.setBorderPainted(false);
+				btnFechar.setOpaque(false);
+				btnFechar.setFont(new Font("Super Mario 256", Font.PLAIN, 18));
+				btnFechar.setForeground(new Color(51, 51, 0));
+				btnFechar.setBackground(new Color(102, 51, 0));
+				btnFechar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						MiniSambura.setVisible(false);
+					}
+				});
+				btnFechar.setBounds(42, 193, 113, 26);
+				MiniSambura.add(btnFechar);
 		Ranking.setBounds(0, 0, 606, 429);
 		contentPane.add(Ranking);
 		Ranking.setLayout(null);
 		
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setForeground(new Color(102, 51, 0));
-		btnVoltar.setFont(new Font("Super Mario Bros.", Font.BOLD, 18));
+		btnVoltar.setBorderPainted(false);
 		btnVoltar.setOpaque(false);
+		btnVoltar.setForeground(new Color(102, 51, 0));
+		btnVoltar.setFont(new Font("Super Mario 256", Font.BOLD, 18));
 		btnVoltar.setBackground(new Color(255, 255, 204));
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -415,7 +687,7 @@ public class ViewGame extends JFrame{
 		
 		JLabel lblRanking = new JLabel("Ranking");
 		lblRanking.setForeground(Color.WHITE);
-		lblRanking.setFont(new Font("Super Mario Bros.", Font.PLAIN, 26));
+		lblRanking.setFont(new Font("Super Mario 256", Font.PLAIN, 26));
 		lblRanking.setBounds(12, 79, 149, 34);
 		Ranking.add(lblRanking);
 		
@@ -431,11 +703,12 @@ public class ViewGame extends JFrame{
 		Sambura.setLayout(null);
 		
 		JButton btnVoltar_1 = new JButton("Voltar");
+		btnVoltar_1.setForeground(new Color(102, 51, 0));
 		btnVoltar_1.setHorizontalAlignment(SwingConstants.LEFT);
 		btnVoltar_1.setBackground(new Color(102, 51, 0));
 		btnVoltar_1.setBorderPainted(false);
 		btnVoltar_1.setOpaque(false);
-		btnVoltar_1.setFont(new Font("Super Mario Bros.", Font.PLAIN, 17));
+		btnVoltar_1.setFont(new Font("Super Mario 256", Font.PLAIN, 17));
 		btnVoltar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				AbrirHome();
@@ -445,9 +718,9 @@ public class ViewGame extends JFrame{
 		btnVoltar_1.setBounds(12, 398, 117, 26);
 		Sambura.add(btnVoltar_1);
 		
-		JLabel lblSambur = new JLabel("Sambur\u00E1");
+		JLabel lblSambur = new JLabel("Balaio");
 		lblSambur.setForeground(Color.WHITE);
-		lblSambur.setFont(new Font("Super Mario Bros.", Font.PLAIN, 26));
+		lblSambur.setFont(new Font("Super Mario 256", Font.PLAIN, 26));
 		lblSambur.setBounds(12, 82, 156, 34);
 		Sambura.add(lblSambur);
 		
@@ -457,9 +730,9 @@ public class ViewGame extends JFrame{
 		
 		table = new JTable();
 		table.setEnabled(false);
-		table.setBackground(new Color(204, 255, 102));
-		table.setSelectionForeground(new Color(204, 153, 0));
-		table.setForeground(new Color(102, 51, 0));
+		table.setBackground(new Color(255, 255, 255));
+		table.setSelectionForeground(new Color(255, 255, 255));
+		table.setForeground(new Color(0, 0, 0));
 		table.setGridColor(new Color(102, 51, 0));
 		table.setCellSelectionEnabled(true);
 		table.setColumnSelectionAllowed(true);
@@ -473,10 +746,10 @@ public class ViewGame extends JFrame{
 		Praias.setLayout(null);
 		
 		btnPraia2 = new JButton(mundo.GetPraiasDoJogo(1).getNome());
-		btnPraia2.setForeground(new Color(51, 51, 0));
+		btnPraia2.setForeground(new Color(102, 51, 0));
 		btnPraia2.setBackground(new Color(153, 153, 51));
 		btnPraia2.setEnabled(false);
-		btnPraia2.setFont(new Font("Super Mario Bros.", Font.PLAIN, 16));
+		btnPraia2.setFont(new Font("Super Mario 256", Font.PLAIN, 16));
 		btnPraia2.setVerticalAlignment(SwingConstants.TOP);
 		btnPraia2.setHorizontalAlignment(SwingConstants.LEFT);
 		btnPraia2.addActionListener(new ActionListener() {
@@ -487,10 +760,10 @@ public class ViewGame extends JFrame{
 		});
 		
 		btnPraia5 = new JButton(mundo.GetPraiasDoJogo(4).getNome());
-		btnPraia5.setForeground(new Color(51, 51, 0));
+		btnPraia5.setForeground(new Color(102, 51, 0));
 		btnPraia5.setBackground(new Color(153, 153, 51));
 		btnPraia5.setEnabled(false);
-		btnPraia5.setFont(new Font("Super Mario Bros.", Font.PLAIN, 16));
+		btnPraia5.setFont(new Font("Super Mario 256", Font.PLAIN, 16));
 		btnPraia5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Pescador.EscolherPraia(mundo.GetPraiasDoJogo(4));	
@@ -503,10 +776,10 @@ public class ViewGame extends JFrame{
 		Praias.add(btnPraia5);
 		
 		btnPraia4 = new JButton(mundo.GetPraiasDoJogo(3).getNome());
-		btnPraia4.setForeground(new Color(51, 51, 0));
+		btnPraia4.setForeground(new Color(102, 51, 0));
 		btnPraia4.setBackground(new Color(153, 153, 51));
 		btnPraia4.setEnabled(false);
-		btnPraia4.setFont(new Font("Super Mario Bros.", Font.PLAIN, 16));
+		btnPraia4.setFont(new Font("Super Mario 256", Font.PLAIN, 16));
 		btnPraia4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Pescador.EscolherPraia(mundo.GetPraiasDoJogo(3));		
@@ -519,10 +792,10 @@ public class ViewGame extends JFrame{
 		Praias.add(btnPraia4);
 		
 		btnPraia3 = new JButton(mundo.GetPraiasDoJogo(2).getNome());
-		btnPraia3.setForeground(new Color(51, 51, 0));
+		btnPraia3.setForeground(new Color(102, 51, 0));
 		btnPraia3.setBackground(new Color(153, 153, 51));
 		btnPraia3.setEnabled(false);
-		btnPraia3.setFont(new Font("Super Mario Bros.", Font.PLAIN, 16));
+		btnPraia3.setFont(new Font("Super Mario 256", Font.PLAIN, 16));
 		btnPraia3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Pescador.EscolherPraia(mundo.GetPraiasDoJogo(2));	
@@ -537,9 +810,9 @@ public class ViewGame extends JFrame{
 		Praias.add(btnPraia2);
 		
 		btnPraia1 = new JButton(mundo.GetPraiasDoJogo(0).getNome());
-		btnPraia1.setForeground(new Color(51, 51, 0));
+		btnPraia1.setForeground(new Color(102, 51, 0));
 		btnPraia1.setBackground(new Color(204, 153, 51));
-		btnPraia1.setFont(new Font("Super Mario Bros.", Font.PLAIN, 16));
+		btnPraia1.setFont(new Font("Super Mario 256", Font.PLAIN, 16));
 		btnPraia1.setHorizontalAlignment(SwingConstants.LEFT);
 		btnPraia1.setVerticalAlignment(SwingConstants.TOP);
 		btnPraia1.addActionListener(new ActionListener() {
@@ -553,8 +826,8 @@ public class ViewGame extends JFrame{
 		
 		JButton btnNewButton = new JButton("Voltar");
 		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		btnNewButton.setForeground(new Color(51, 51, 0));
-		btnNewButton.setFont(new Font("Super Mario Bros.", Font.PLAIN, 16));
+		btnNewButton.setForeground(new Color(102, 51, 0));
+		btnNewButton.setFont(new Font("Super Mario 256", Font.PLAIN, 16));
 		btnNewButton.setBackground(new Color(250, 250, 210));
 		btnNewButton.setBorderPainted(false);
 		btnNewButton.setOpaque(false);
@@ -574,9 +847,9 @@ public class ViewGame extends JFrame{
 		Praias.add(lblImagem);
 		
 		JButton btnPescar_1 = new JButton("Pescar");
-		btnPescar_1.setFont(new Font("Chlorinap", Font.PLAIN, 24));
+		btnPescar_1.setFont(new Font("Super Mario 256", Font.PLAIN, 24));
 		btnPescar_1.setBackground(new Color(51, 51, 0));
-		btnPescar_1.setForeground(new Color(51, 51, 0));
+		btnPescar_1.setForeground(new Color(102, 51, 0));
 		btnPescar_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Atualizar();
@@ -587,15 +860,15 @@ public class ViewGame extends JFrame{
 		Praias.add(btnPescar_1);
 		
 		lblPraiaEscolhida = new JLabel(mundo.Pescador.getPraiaAtual().getNome());
-		lblPraiaEscolhida.setForeground(new Color(51, 51, 0));
-		lblPraiaEscolhida.setFont(new Font("Chlorinap", Font.PLAIN, 24));
+		lblPraiaEscolhida.setForeground(new Color(102, 51, 0));
+		lblPraiaEscolhida.setFont(new Font("Super Mario 256", Font.PLAIN, 24));
 		lblPraiaEscolhida.setBounds(317, 253, 253, 39);
 		Praias.add(lblPraiaEscolhida);
 		Praias.setEnabled(false);
 		
 		JLabel lblPraias = new JLabel("Praias");
 		lblPraias.setForeground(new Color(255, 255, 255));
-		lblPraias.setFont(new Font("Chlorinap", Font.BOLD, 28));
+		lblPraias.setFont(new Font("Super Mario 256", Font.BOLD, 28));
 		lblPraias.setBounds(24, 12, 134, 39);
 		Praias.add(lblPraias);
 		
@@ -608,310 +881,112 @@ public class ViewGame extends JFrame{
 		label_2.setIcon(new ImageIcon(ViewGame.class.getResource("/Imagens/praia-icon.png")));
 		label_2.setBounds(143, -28, 616, 489);
 		Praias.add(label_2);
-		
-		
-		System.out.println("========="+mundo.PraiasDoJogo.get(1).GetPeixe(0).getNome());
-		System.out.println("========="+mundo.PraiasDoJogo.get(1).GetPeixe(1).getNome());
-		System.out.println("========="+mundo.PraiasDoJogo.get(1).GetPeixe(2).getNome());
-
-		Pescaria.setBounds(0, 0, 606, 429);
-		contentPane.add(Pescaria);
-		Pescaria.setLayout(null);
-		
-		JButton btnArremessar = new JButton("Arremessar");
-		btnArremessar.setForeground(new Color(102, 51, 0));
-		btnArremessar.setFont(new Font("Super Mario Bros.", Font.PLAIN, 16));
-		btnArremessar.setBackground(new Color(153, 153, 51));
-		btnArremessar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-					new Thread(new Runnable() {
-						   public void run() {
-						    try {
-						    btnArremessar.setEnabled(false);
-						    
-						   
-						    lblArremesse.setText("Arremessando...");
-						     Thread.sleep(Pescador.getVara().getTempoDeArremesso()); //vara 
-						     lblArremesse.setText("Esperando...");
-						     Thread.sleep(Pescador.getIsca().getTempoDeEspera());
-						     lblArremesse.setText("Fisque!");
-						 	if(chckbxComoPuxar.isSelected()) {
-								lblTutorial.setText("<html>Para puxar, clique nas teclas Cima e Baixo do seu teclado alternadamente até o peixer vir.<html>");
-							}
-							    btnFisgar.setEnabled(true);
-							    Pescador.puxar();
-							    
-						    } catch (InterruptedException e) {
-						     e.printStackTrace();
-						    }
-						   }
-						  }).start();	
-				}
-						});
-		
-		btnArremessar.setBounds(221, 241, 153, 51);
-		Pescaria.add(btnArremessar);
-		
-		btnPegarPeixe = new JButton("Pegar Peixe");
-		btnPegarPeixe.setFont(new Font("Jokerman", Font.PLAIN, 12));
-		btnPegarPeixe.setForeground(UIManager.getColor("Button.foreground"));
-		btnPegarPeixe.setBackground(UIManager.getColor("Button.darkShadow"));
-		btnPegarPeixe.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnArremessar.setEnabled(true);
-				lblArremesse.setText("Arremesse!");
-				btnPegarPeixe.setEnabled(false);
-				btnJogarNaAgua.setEnabled(false);
-				Pescador.PegarPeixe();
-				Atualizar();
-			}
-		});
-		btnPegarPeixe.setEnabled(false);
-		btnPegarPeixe.setBounds(305, 335, 117, 39);
-		Pescaria.add(btnPegarPeixe);
-		
-		btnJogarNaAgua = new JButton("Jogar na agua");
-		btnJogarNaAgua.setForeground(UIManager.getColor("Button.foreground"));
-		btnJogarNaAgua.setFont(new Font("Jokerman", Font.PLAIN, 12));
-		btnJogarNaAgua.setBackground(UIManager.getColor("Button.darkShadow"));
-		btnJogarNaAgua.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				btnArremessar.setEnabled(true);
-				lblArremesse.setText("Arremesse!");
-				btnPegarPeixe.setEnabled(false);
-				btnJogarNaAgua.setEnabled(false);
-				Pescador.JogarPeixeFora();
-				Atualizar();
-			}
-		});
-		btnJogarNaAgua.setEnabled(false);
-		btnJogarNaAgua.setBounds(175, 335, 117, 39);
-		Pescaria.add(btnJogarNaAgua);
-		
-		JButton btnSambur = new JButton("Sambur\u00E1");
-		btnSambur.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AbrirMiniSambura();
-				Atualizar();
-			}
-		});
-		btnSambur.setBounds(33, 92, 90, 33);
-		Pescaria.add(btnSambur);
-		
-		JButton btnSairDaPraia = new JButton("Sair da praia");
-		btnSairDaPraia.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				AbrirHome();
-			}
-		});
-		btnSairDaPraia.setBounds(8, 380, 123, 26);
-		Pescaria.add(btnSairDaPraia);
-		
-		lblPraiaAtual = new JLabel("New label");
-		lblPraiaAtual.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPraiaAtual.setForeground(new Color(255, 255, 255));
-		lblPraiaAtual.setFont(new Font("Super Mario Bros.", Font.PLAIN, 32));
-		lblPraiaAtual.setBounds(152, 67, 278, 59);
-		Pescaria.add(lblPraiaAtual);
-		
-		lblPeixePescado = new JLabel("NomePeixe");
-		lblPeixePescado.setForeground(new Color(0, 0, 0));
-		lblPeixePescado.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblPeixePescado.setBounds(310, 198, 178, 16);
-		Pescaria.add(lblPeixePescado);
-		
-		ImagemPeixe = new JLabel("ImagemPeixe");
-		ImagemPeixe.setBounds(202, 185, 90, 44);
-		Pescaria.add(ImagemPeixe);
-		
-		btnFisgar = new JButton("Fisgar");
-		btnFisgar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				lblArremesse.setText("Puxe!");
-			}
-		});
-		btnFisgar.setForeground(UIManager.getColor("Button.foreground"));
-		btnFisgar.setFont(new Font("Jokerman", Font.PLAIN, 14));
-		btnFisgar.setBackground(UIManager.getColor("Button.darkShadow"));
-		btnFisgar.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyReleased(KeyEvent e) {
-				if(e.getKeyCode() == 38) {
-					x++;
-					if(x == 2) {
-						x=1;
-						
-					}
-				}
-				if(e.getKeyCode() == 40) {
-					y++;
-					if(y == 2) {
-						y=1;
-					}
-				}
-				if(x == 1 && y ==1) {
-					z++;
-					x = 0;
-					y = 0;
-					if(z == Pescador.getMolinete().getTempoDePuxe()) {
-						z = 0;
-							Pescador.puxar();
-						if (Pescador.getSambura().getEspaco() != Pescador.getSambura().QuantidadePeixe()) {
-							btnPegarPeixe.setEnabled(true);
-						}else {
-							btnPegarPeixe.setEnabled(false);
-						}
-						btnJogarNaAgua.setEnabled(true);
-						lblTutorial.setText("");
-						Atualizar();
-						
-						btnFisgar.setEnabled(false);
-					}
-				}
-			}
-		});
-		btnFisgar.setEnabled(false);
-		btnFisgar.setBounds(247, 297, 98, 33);
-		Pescaria.add(btnFisgar);
-		
-		chckbxComoPuxar = new JCheckBox("Como puxar");
-		chckbxComoPuxar.setSelected(true);
-		chckbxComoPuxar.setBounds(488, 381, 112, 24);
-		Pescaria.add(chckbxComoPuxar);
-		
-		lblTutorial = new JLabel("");
-		lblTutorial.setHorizontalTextPosition(SwingConstants.LEADING);
-		lblTutorial.setHorizontalAlignment(SwingConstants.LEFT);
-		lblTutorial.setVerticalAlignment(SwingConstants.TOP);
-		lblTutorial.setBounds(404, 212, 106, 105);
-		Pescaria.add(lblTutorial);
-		
-		lblMiniVara = new JLabel("New label");
-		lblMiniVara.setBounds(522, 194, 55, 51);
-		Pescaria.add(lblMiniVara);
-		
-		lblMiniMol = new JLabel("New label");
-		lblMiniMol.setBounds(522, 241, 55, 51);
-		Pescaria.add(lblMiniMol);
-		
-		lblMiniIsca = new JLabel("New label");
-		lblMiniIsca.setBounds(522, 289, 55, 51);
-		Pescaria.add(lblMiniIsca);
-		
-		JLabel lblNewLabel_4 = new JLabel("");
-		lblNewLabel_4.setIcon(new ImageIcon(ViewGame.class.getResource("/Imagens/placa2.png")));
-		lblNewLabel_4.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_4.setBackground(new Color(139, 69, 19));
-		lblNewLabel_4.setBounds(142, 1, 305, 158);
-		Pescaria.add(lblNewLabel_4);
-		lblArremesse.setBorder(new LineBorder(new Color(102, 51, 0)));
-		lblArremesse.setOpaque(true);
-		lblArremesse.setHorizontalAlignment(SwingConstants.CENTER);
-		lblArremesse.setForeground(new Color(0, 0, 153));
-		lblArremesse.setFont(new Font("Chiller", Font.BOLD, 32));
-		
-		
-		lblArremesse.setBounds(175, 125, 232, 33);
-		Pescaria.add(lblArremesse);
-		Pescaria.setFocusTraversalPolicy(new FocusTraversalOnArray(new Component[]{btnSairDaPraia, btnArremessar, btnPegarPeixe, lblArremesse, btnJogarNaAgua, btnSambur, lblPraiaAtual, lblPeixePescado}));
-		
-		label = new JLabel("");
-		label.setBorder(new LineBorder(new Color(102, 51, 0)));
-		label.setOpaque(true);
-		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setBounds(192, 183, 215, 51);
-		Pescaria.add(label);
-		
-		
-		
-		lblLblfundo = new JLabel("");
-		lblLblfundo.setBounds(0, 0, 600, 429);
-		Pescaria.add(lblLblfundo);
 		Mercado.setBounds(0, 0, 606, 429);
 		contentPane.add(Mercado);
 		Mercado.setLayout(null);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
-		tabbedPane.setBounds(12, 111, 577, 277);
+		tabbedPane.setBounds(12, 111, 403, 277);
 		Mercado.add(tabbedPane);
 		
 		JPanel panel = new JPanel();
+		panel.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
 		tabbedPane.addTab("Varas", null, panel, null);
 		panel.setLayout(null);
 		
 		lblVara1 = new JLabel("New label");
-		lblVara1.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblVara1.setBounds(94, 36, 149, 16);
+		lblVara1.setForeground(new Color(102, 51, 0));
+		lblVara1.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblVara1.setBounds(94, 36, 186, 16);
 		panel.add(lblVara1);
 		
 		btnVara1 = new JButton("New button");
+		btnVara1.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnVara1.setBackground(new Color(102, 51, 0));
+		btnVara1.setForeground(new Color(102, 51, 0));
 		btnVara1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarVara(mercado.GetVaraDoMercado(0));
 				Atualizar();
 			}
 		});
-		btnVara1.setBounds(261, 32, 98, 26);
+		btnVara1.setBounds(290, 31, 98, 26);
 		panel.add(btnVara1);
 		
 		btnVara2 = new JButton("New button");
+		btnVara2.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnVara2.setBackground(new Color(102, 51, 0));
+		btnVara2.setForeground(new Color(102, 51, 0));
 		btnVara2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarVara(mercado.GetVaraDoMercado(1));
 				Atualizar();
 			}
 		});
-		btnVara2.setBounds(261, 70, 98, 26);
+		btnVara2.setBounds(290, 71, 98, 26);
 		panel.add(btnVara2);
 		
 		btnVara3 = new JButton("New button");
+		btnVara3.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnVara3.setBackground(new Color(102, 51, 0));
+		btnVara3.setForeground(new Color(102, 51, 0));
 		btnVara3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarVara(mercado.GetVaraDoMercado(2));
 				Atualizar();
 			}
 		});
-		btnVara3.setBounds(261, 108, 98, 26);
+		btnVara3.setBounds(290, 108, 98, 26);
 		panel.add(btnVara3);
 		
 		btnVara4 = new JButton("New button");
+		btnVara4.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnVara4.setBackground(new Color(102, 51, 0));
+		btnVara4.setForeground(new Color(102, 51, 0));
 		btnVara4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarVara(mercado.GetVaraDoMercado(3));
 				Atualizar();
 			}
 		});
-		btnVara4.setBounds(261, 146, 98, 26);
+		btnVara4.setBounds(290, 147, 98, 26);
 		panel.add(btnVara4);
 		
 		btnVara5 = new JButton("New button");
+		btnVara5.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnVara5.setBackground(new Color(102, 51, 0));
+		btnVara5.setForeground(new Color(102, 51, 0));
 		btnVara5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarVara(mercado.GetVaraDoMercado(4));
 				Atualizar();
 			}
 		});
-		btnVara5.setBounds(261, 184, 98, 26);
+		btnVara5.setBounds(290, 184, 98, 26);
 		panel.add(btnVara5);
 		
 		lblVara2 = new JLabel("New label");
-		lblVara2.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblVara2.setBounds(94, 74, 149, 16);
+		lblVara2.setForeground(new Color(102, 51, 0));
+		lblVara2.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblVara2.setBounds(94, 74, 186, 16);
 		panel.add(lblVara2);
 		
 		lblVara3 = new JLabel("New label");
-		lblVara3.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblVara3.setBounds(94, 112, 149, 16);
+		lblVara3.setForeground(new Color(102, 51, 0));
+		lblVara3.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblVara3.setBounds(94, 112, 186, 16);
 		panel.add(lblVara3);
 		
 		lblVara4 = new JLabel("New label");
-		lblVara4.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblVara4.setBounds(94, 150, 149, 16);
+		lblVara4.setForeground(new Color(102, 51, 0));
+		lblVara4.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblVara4.setBounds(94, 150, 186, 16);
 		panel.add(lblVara4);
 		
 		lblVara5 = new JLabel("New label");
-		lblVara5.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblVara5.setBounds(94, 188, 149, 16);
+		lblVara5.setForeground(new Color(102, 51, 0));
+		lblVara5.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblVara5.setBounds(94, 188, 186, 16);
 		panel.add(lblVara5);
 		
 		lblMiniVara1 = new JLabel("");
@@ -939,78 +1014,98 @@ public class ViewGame extends JFrame{
 		panel_1.setLayout(null);
 		
 		btnMolinete1 = new JButton("New button");
+		btnMolinete1.setBackground(new Color(102, 51, 0));
+		btnMolinete1.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnMolinete1.setForeground(new Color(102, 51, 0));
 		btnMolinete1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarMolinete(mercado.GetMolineteDoMercado(0));
 				Atualizar();
 			}
 		});
-		btnMolinete1.setBounds(261, 34, 98, 26);
+		btnMolinete1.setBounds(290, 31, 98, 26);
 		panel_1.add(btnMolinete1);
 		
 		btnMolinete2 = new JButton("New button");
+		btnMolinete2.setBackground(new Color(102, 51, 0));
+		btnMolinete2.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnMolinete2.setForeground(new Color(102, 51, 0));
 		btnMolinete2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarMolinete(mercado.GetMolineteDoMercado(1));
 				Atualizar();
 			}
 		});
-		btnMolinete2.setBounds(261, 72, 98, 26);
+		btnMolinete2.setBounds(290, 68, 98, 26);
 		panel_1.add(btnMolinete2);
 		
 		btnMolinete3 = new JButton("New button");
+		btnMolinete3.setBackground(new Color(102, 51, 0));
+		btnMolinete3.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnMolinete3.setForeground(new Color(102, 51, 0));
 		btnMolinete3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarMolinete(mercado.GetMolineteDoMercado(2));
 				Atualizar();
 			}
 		});
-		btnMolinete3.setBounds(261, 110, 98, 26);
+		btnMolinete3.setBounds(290, 111, 98, 26);
 		panel_1.add(btnMolinete3);
 		
 		btnMolinete4 = new JButton("New button");
+		btnMolinete4.setBackground(new Color(102, 51, 0));
+		btnMolinete4.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnMolinete4.setForeground(new Color(102, 51, 0));
 		btnMolinete4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarMolinete(mercado.GetMolineteDoMercado(2));
 				Atualizar();
 			}
 		});
-		btnMolinete4.setBounds(261, 148, 98, 26);
+		btnMolinete4.setBounds(290, 149, 98, 26);
 		panel_1.add(btnMolinete4);
 		
 		btnMolinete5 = new JButton("New button");
+		btnMolinete5.setBackground(new Color(102, 51, 0));
+		btnMolinete5.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnMolinete5.setForeground(new Color(102, 51, 0));
 		btnMolinete5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarMolinete(mercado.GetMolineteDoMercado(3));
 				Atualizar();
 			}
 		});
-		btnMolinete5.setBounds(261, 186, 98, 26);
+		btnMolinete5.setBounds(290, 186, 98, 26);
 		panel_1.add(btnMolinete5);
 		
 		lblMolinete1 = new JLabel("New label");
-		lblMolinete1.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblMolinete1.setBounds(98, 34, 145, 16);
+		lblMolinete1.setForeground(new Color(102, 51, 0));
+		lblMolinete1.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblMolinete1.setBounds(92, 34, 188, 16);
 		panel_1.add(lblMolinete1);
 		
 		lblMolinete2 = new JLabel("New label");
-		lblMolinete2.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblMolinete2.setBounds(98, 72, 145, 16);
+		lblMolinete2.setForeground(new Color(102, 51, 0));
+		lblMolinete2.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblMolinete2.setBounds(92, 72, 188, 16);
 		panel_1.add(lblMolinete2);
 		
 		lblMolinete3 = new JLabel("New label");
-		lblMolinete3.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblMolinete3.setBounds(98, 110, 145, 16);
+		lblMolinete3.setForeground(new Color(102, 51, 0));
+		lblMolinete3.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblMolinete3.setBounds(92, 110, 188, 16);
 		panel_1.add(lblMolinete3);
 		
 		lblMolinete4 = new JLabel("New label");
-		lblMolinete4.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblMolinete4.setBounds(98, 148, 145, 16);
+		lblMolinete4.setForeground(new Color(102, 51, 0));
+		lblMolinete4.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblMolinete4.setBounds(92, 148, 188, 16);
 		panel_1.add(lblMolinete4);
 		
 		lblMolinete5 = new JLabel("New label");
-		lblMolinete5.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblMolinete5.setBounds(98, 186, 145, 16);
+		lblMolinete5.setForeground(new Color(102, 51, 0));
+		lblMolinete5.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblMolinete5.setBounds(92, 186, 188, 16);
 		panel_1.add(lblMolinete5);
 		
 		lblMolMini1 = new JLabel("");
@@ -1038,78 +1133,98 @@ public class ViewGame extends JFrame{
 		panel_2.setLayout(null);
 		
 		btnIsca1 = new JButton("New button");
+		btnIsca1.setForeground(new Color(102, 51, 0));
+		btnIsca1.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnIsca1.setBackground(new Color(102, 51, 0));
 		btnIsca1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarIsca(mercado.GetIscaDoMercado(0));
 				Atualizar();
 			}
 		});
-		btnIsca1.setBounds(259, 40, 98, 26);
+		btnIsca1.setBounds(290, 41, 98, 26);
 		panel_2.add(btnIsca1);
 		
 		btnIsca2 = new JButton("New button");
+		btnIsca2.setForeground(new Color(102, 51, 0));
+		btnIsca2.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnIsca2.setBackground(new Color(102, 51, 0));
 		btnIsca2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarIsca(mercado.GetIscaDoMercado(1));
 				Atualizar();
 			}
 		});
-		btnIsca2.setBounds(259, 77, 98, 26);
+		btnIsca2.setBounds(290, 78, 98, 26);
 		panel_2.add(btnIsca2);
 		
 		btnIsca3 = new JButton("New button");
+		btnIsca3.setForeground(new Color(102, 51, 0));
+		btnIsca3.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnIsca3.setBackground(new Color(102, 51, 0));
 		btnIsca3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarIsca(mercado.GetIscaDoMercado(2));
 				Atualizar();
 			}
 		});
-		btnIsca3.setBounds(259, 115, 98, 26);
+		btnIsca3.setBounds(290, 116, 98, 26);
 		panel_2.add(btnIsca3);
 		
 		btnIsca4 = new JButton("New button");
+		btnIsca4.setForeground(new Color(102, 51, 0));
+		btnIsca4.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnIsca4.setBackground(new Color(102, 51, 0));
 		btnIsca4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				mercado.ComprarIsca(mercado.GetIscaDoMercado(0));
+				mercado.ComprarIsca(mercado.GetIscaDoMercado(3));
 				Atualizar();
 			}
 		});
-		btnIsca4.setBounds(259, 153, 98, 26);
+		btnIsca4.setBounds(290, 155, 98, 26);
 		panel_2.add(btnIsca4);
 		
 		btnIsca5 = new JButton("New button");
+		btnIsca5.setForeground(new Color(102, 51, 0));
+		btnIsca5.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnIsca5.setBackground(new Color(102, 51, 0));
 		btnIsca5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.ComprarIsca(mercado.GetIscaDoMercado(4));
 				Atualizar();
 			}
 		});
-		btnIsca5.setBounds(259, 192, 98, 26);
+		btnIsca5.setBounds(290, 193, 98, 26);
 		panel_2.add(btnIsca5);
 		
 		lblIsca1 = new JLabel("New label");
-		lblIsca1.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblIsca1.setBounds(105, 44, 147, 16);
+		lblIsca1.setForeground(new Color(102, 51, 0));
+		lblIsca1.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblIsca1.setBounds(105, 44, 175, 16);
 		panel_2.add(lblIsca1);
 		
 		lblIsca2 = new JLabel("New label");
-		lblIsca2.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblIsca2.setBounds(105, 82, 147, 16);
+		lblIsca2.setForeground(new Color(102, 51, 0));
+		lblIsca2.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblIsca2.setBounds(105, 82, 175, 16);
 		panel_2.add(lblIsca2);
 		
 		lblIsca3 = new JLabel("New label");
-		lblIsca3.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblIsca3.setBounds(105, 120, 147, 16);
+		lblIsca3.setForeground(new Color(102, 51, 0));
+		lblIsca3.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblIsca3.setBounds(105, 120, 175, 16);
 		panel_2.add(lblIsca3);
 		
 		lblIsca4 = new JLabel("New label");
-		lblIsca4.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblIsca4.setBounds(105, 158, 147, 16);
+		lblIsca4.setForeground(new Color(102, 51, 0));
+		lblIsca4.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblIsca4.setBounds(105, 158, 175, 16);
 		panel_2.add(lblIsca4);
 		
 		lblIsca5 = new JLabel("New label");
-		lblIsca5.setFont(new Font("Lucida Sans", Font.PLAIN, 14));
-		lblIsca5.setBounds(105, 196, 147, 16);
+		lblIsca5.setForeground(new Color(102, 51, 0));
+		lblIsca5.setFont(new Font("Super Mario 256", Font.PLAIN, 12));
+		lblIsca5.setBounds(105, 196, 175, 16);
 		panel_2.add(lblIsca5);
 		
 		lblIscMini1 = new JLabel("");
@@ -1132,35 +1247,25 @@ public class ViewGame extends JFrame{
 		lblIscMini5.setBounds(12, 181, 70, 36);
 		panel_2.add(lblIscMini5);
 		
-		JPanel panel_4 = new JPanel();
-		tabbedPane.addTab("Sambur\u00E1", null, panel_4, null);
-		panel_4.setLayout(null);
-		
-		btnAprimorarS = new JButton("New button");
-		btnAprimorarS.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Pescador.AprimorarSambura();
-				Atualizar();
-			}
-		});
-		btnAprimorarS.setBounds(230, 120, 98, 26);
-		panel_4.add(btnAprimorarS);
-		
-		lblAprimorarS = new JLabel("Aprimore seu Sambur\u00E1 em espa\u00E7os");
-		lblAprimorarS.setBounds(173, 70, 222, 16);
-		panel_4.add(lblAprimorarS);
-		
-		JButton btnNewButton_3 = new JButton("Vender Peixes");
-		btnNewButton_3.addActionListener(new ActionListener() {
+		btnVenderPeixes = new JButton("Vender Peixes");
+		btnVenderPeixes.setBackground(new Color(102, 51, 0));
+		btnVenderPeixes.setForeground(new Color(102, 51, 0));
+		btnVenderPeixes.setFont(new Font("Super Mario 256", Font.PLAIN, 14));
+		btnVenderPeixes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				mercado.Vender();
 				Atualizar();
 			}
 		});
-		btnNewButton_3.setBounds(467, 79, 122, 34);
-		Mercado.add(btnNewButton_3);
+		btnVenderPeixes.setBounds(425, 329, 171, 59);
+		Mercado.add(btnVenderPeixes);
 		
 		JButton btnVoltar_2 = new JButton("Voltar");
+		btnVoltar_2.setBorderPainted(false);
+		btnVoltar_2.setOpaque(false);
+		btnVoltar_2.setBackground(new Color(153, 153, 51));
+		btnVoltar_2.setForeground(new Color(102, 51, 0));
+		btnVoltar_2.setFont(new Font("Super Mario 256", Font.PLAIN, 14));
 		btnVoltar_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				AbrirHome();
@@ -1171,9 +1276,64 @@ public class ViewGame extends JFrame{
 		
 		JLabel lblMercado = new JLabel("Mercado");
 		lblMercado.setForeground(new Color(255, 255, 255));
-		lblMercado.setFont(new Font("Jokerman", Font.PLAIN, 18));
+		lblMercado.setFont(new Font("Super Mario 256", Font.BOLD, 20));
 		lblMercado.setBounds(12, 79, 132, 26);
 		Mercado.add(lblMercado);
+		
+		btnAprimorarS = new JButton("New button");
+		btnAprimorarS.setBackground(new Color(102, 51, 0));
+		btnAprimorarS.setForeground(new Color(102, 51, 0));
+		btnAprimorarS.setFont(new Font("Super Mario 256", Font.PLAIN, 13));
+		btnAprimorarS.setBounds(425, 284, 171, 34);
+		Mercado.add(btnAprimorarS);
+		
+		JLabel lblEquipamentos = new JLabel("Equipamentos");
+		lblEquipamentos.setForeground(new Color(102, 51, 0));
+		lblEquipamentos.setFont(new Font("Super Mario 256", Font.PLAIN, 16));
+		lblEquipamentos.setBounds(425, 131, 171, 34);
+		Mercado.add(lblEquipamentos);
+		
+		lblVaraatuallbl = new JLabel("VaraAtuallbl");
+		lblVaraatuallbl.setForeground(new Color(255, 255, 255));
+		lblVaraatuallbl.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+		lblVaraatuallbl.setBounds(425, 176, 171, 14);
+		Mercado.add(lblVaraatuallbl);
+		
+		lblMolineteatuallbl = new JLabel("MolineteAtuallbl");
+		lblMolineteatuallbl.setForeground(new Color(255, 255, 255));
+		lblMolineteatuallbl.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+		lblMolineteatuallbl.setBounds(425, 201, 171, 14);
+		Mercado.add(lblMolineteatuallbl);
+		
+		lblIscaatuallbl = new JLabel("IscaAtuallbl");
+		lblIscaatuallbl.setForeground(new Color(255, 255, 255));
+		lblIscaatuallbl.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+		lblIscaatuallbl.setBounds(425, 226, 171, 14);
+		Mercado.add(lblIscaatuallbl);
+		
+		JLabel lblAprimorarSambur = new JLabel("Aprimorar Balaio");
+		lblAprimorarSambur.setForeground(new Color(102, 51, 0));
+		lblAprimorarSambur.setFont(new Font("Super Mario 256", Font.PLAIN, 11));
+		lblAprimorarSambur.setHorizontalAlignment(SwingConstants.CENTER);
+		lblAprimorarSambur.setBounds(425, 259, 171, 14);
+		Mercado.add(lblAprimorarSambur);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(425, 251, 171, 2);
+		Mercado.add(separator);
+		btnAprimorarS.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				Pescador.AprimorarSambura();
+				Atualizar();
+			}
+		});
+			
+			TocarMp3 tc = new TocarMp3();
+		
+		
+		System.out.println("========="+mundo.PraiasDoJogo.get(1).GetPeixe(0).getNome());
+		System.out.println("========="+mundo.PraiasDoJogo.get(1).GetPeixe(1).getNome());
+		System.out.println("========="+mundo.PraiasDoJogo.get(1).GetPeixe(2).getNome());
 		
 		if(Pescador.getMao() == null) {
 			lblPeixePescado.setText("");
@@ -1263,9 +1423,7 @@ public class ViewGame extends JFrame{
 		btnIsca4.setText(mercado.GetIscaDoMercado(3).getPreco()+ " R$");
 		lblIsca5.setText(mercado.GetIscaDoMercado(4).getNome());
 		btnIsca5.setText(mercado.GetIscaDoMercado(4).getPreco()+ " R$");
-		
-		lblAprimorarS.setText("Aprimore seu sambura em "+ Pescador.getSambura().getEspaco()*2 +" espaços");
-		btnAprimorarS.setText(Pescador.getSambura().getPreco()*2+ " R$");
+		btnAprimorarS.setText(Pescador.getSambura().getPreco()+ " R$");
 		
 		if(Pescador.getMao() == null) {
 			lblPeixePescado.setText("");
@@ -1319,6 +1477,93 @@ public class ViewGame extends JFrame{
 		}
 		if(Pescador.getXpBar().getXp2() >= mundo.PraiasDoJogo.get(4).getXpmin()) {
 			btnPraia5.setEnabled(true);
+		}
+		
+		if(Pescador.getVara().getId() == 1) {
+			btnVara1.setEnabled(false);
+		}
+		if(Pescador.getVara().getId() == 2) {
+			btnVara1.setEnabled(false);
+			btnVara2.setEnabled(false);
+		}
+		if(Pescador.getVara().getId() == 3) {
+			btnVara1.setEnabled(false);
+			btnVara2.setEnabled(false);
+			btnVara3.setEnabled(false);
+		}
+		if(Pescador.getVara().getId() == 4) {
+			btnVara1.setEnabled(false);
+			btnVara2.setEnabled(false);
+			btnVara3.setEnabled(false);
+			btnVara4.setEnabled(false);
+		}
+		if(Pescador.getVara().getId() == 5) {
+			btnVara1.setEnabled(false);
+			btnVara2.setEnabled(false);
+			btnVara3.setEnabled(false);
+			btnVara4.setEnabled(false);
+			btnVara5.setEnabled(false);
+		}
+		
+		if(Pescador.getMolinete().getId() == 1) {
+			btnMolinete1.setEnabled(false);
+		}
+		if(Pescador.getMolinete().getId() == 2) {
+			btnMolinete1.setEnabled(false);
+			btnMolinete2.setEnabled(false);
+		}
+		if(Pescador.getMolinete().getId() == 3) {
+			btnMolinete1.setEnabled(false);
+			btnMolinete2.setEnabled(false);
+			btnMolinete3.setEnabled(false);
+		}
+		if(Pescador.getMolinete().getId() == 4) {
+			btnMolinete1.setEnabled(false);
+			btnMolinete2.setEnabled(false);
+			btnMolinete3.setEnabled(false);
+			btnMolinete4.setEnabled(false);
+		}
+		if(Pescador.getMolinete().getId() == 5) {
+			btnMolinete1.setEnabled(false);
+			btnMolinete2.setEnabled(false);
+			btnMolinete3.setEnabled(false);
+			btnMolinete4.setEnabled(false);
+			btnMolinete5.setEnabled(false);
+		}
+		if(Pescador.getIsca().getId() == 1) {
+			btnIsca1.setEnabled(false);
+		}
+		if(Pescador.getIsca().getId() == 2) {
+			btnIsca1.setEnabled(false);
+			btnIsca2.setEnabled(false);
+		}
+		if(Pescador.getIsca().getId() == 3) {
+			btnIsca1.setEnabled(false);
+			btnIsca2.setEnabled(false);
+			btnIsca3.setEnabled(false);
+		}
+		if(Pescador.getIsca().getId() == 4) {
+			btnIsca1.setEnabled(false);
+			btnIsca2.setEnabled(false);
+			btnIsca3.setEnabled(false);
+			btnIsca4.setEnabled(false);
+		}
+		if(Pescador.getIsca().getId() == 5) {
+			btnIsca1.setEnabled(false);
+			btnIsca2.setEnabled(false);
+			btnIsca3.setEnabled(false);
+			btnIsca4.setEnabled(false);
+			btnIsca5.setEnabled(false);
+		}
+		
+		lblVaraatuallbl.setText(Pescador.getVara().getNome());
+		lblMolineteatuallbl.setText(Pescador.getMolinete().getNome());
+		lblIscaatuallbl.setText(Pescador.getIsca().getNome());
+		
+		if(Pescador.getSambura().QuantidadePeixe() == 0) {
+			btnVenderPeixes.setEnabled(false);
+		}else {
+			btnVenderPeixes.setEnabled(true);
 		}
 	}
 	public void AbrirPraias() {

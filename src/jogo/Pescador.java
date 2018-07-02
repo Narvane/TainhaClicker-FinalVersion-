@@ -29,7 +29,6 @@ public class Pescador {
 		this.praiaAtual = new Praia();
 		this.mao = null;
 		this.praiaAtual.setPescador(this);
-		
 	}
 	//Metodos
 	public void puxar() {

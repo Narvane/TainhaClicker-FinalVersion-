@@ -11,6 +11,8 @@ import jogo.Mundo;
 import jogo.MundoDAO;
 import jogo.Pescador;
 import jogo.PescadorDAO;
+import limitadoresDeTexto.LimiteLetras;
+import limitadoresDeTexto.LimiteSenha;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -81,12 +83,12 @@ public class ViewLogin extends JFrame {
 		tabbedPane.addTab("Login", null, panel, null);
 		panel.setLayout(null);
 		
-		textField = new JTextField();
+		textField = new LimiteLetras(35);
 		textField.setBounds(102, 112, 109, 20);
 		panel.add(textField);
 		textField.setColumns(10);
 		
-		passField = new JPasswordField();
+		passField = new LimiteSenha(35);
 		passField.setBounds(102, 170, 109, 20);
 		panel.add(passField);
 		
@@ -110,6 +112,8 @@ public class ViewLogin extends JFrame {
 					VG.setVisible(true);
 					setVisible(false);
 					System.out.println(Pescador.getPraiaAtual().getNome());
+				}else {
+					JOptionPane.showMessageDialog(contentPane, "Senha ou Usuário incorretos!");
 				}
 			}
 		});
@@ -128,16 +132,16 @@ public class ViewLogin extends JFrame {
 		tabbedPane.addTab("Cadastro", null, panel_1, null);
 		panel_1.setLayout(null);
 		
-		cadTextField = new JTextField();
+		cadTextField = new LimiteLetras(35);
 		cadTextField.setBounds(41, 92, 158, 20);
 		panel_1.add(cadTextField);
 		cadTextField.setColumns(10);
 		
-		cadPassField = new JPasswordField();
+		cadPassField = new LimiteSenha(35);
 		cadPassField.setBounds(41, 148, 158, 20);
 		panel_1.add(cadPassField);
 		
-		cfCadPassField = new JPasswordField();
+		cfCadPassField = new LimiteSenha(35);
 		cfCadPassField.setBounds(40, 196, 159, 20);
 		panel_1.add(cfCadPassField);
 		
@@ -154,6 +158,7 @@ public class ViewLogin extends JFrame {
 					
 					PescadorDAO pdao = new PescadorDAO();
 					pdao.CadastrarPescador(p);
+					JOptionPane.showMessageDialog(contentPane, "Cadastrado com sucesso!");
 				}else {
 					JOptionPane.showMessageDialog(contentPane,"Senhas não coincidem!");
 				}

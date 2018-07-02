@@ -13,7 +13,7 @@ import connection.Conexão;
 
 public class PescadorDAO {
 	
-public boolean Acesso =true;
+public boolean Acesso = false;
 private Connection conexao;
 
 	public void CadastrarPescador(Pescador p) {		
@@ -86,13 +86,14 @@ private Connection conexao;
 					}
 				}
 				InserirPeixes(p, mundo.getPeixesDoJogo());
-				
+				Acesso = true;
 		}
 			stmt.close();
 			conexao.close();
 			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
+			Acesso = false;
 		}
 	}
 	public void SalvarEquips(Pescador p) {
