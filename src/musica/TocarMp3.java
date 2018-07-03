@@ -16,7 +16,7 @@ class musica extends Thread {
 			try {
 				do 
 				{
-			InputStream imput = this.getClass().getResourceAsStream("Impossible.mp3") ;
+			InputStream imput = this.getClass().getResourceAsStream("BobSong.mp3") ;
 				ply = new Player (imput);
 				ply.play();
 				 }while(loop);

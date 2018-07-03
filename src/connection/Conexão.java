@@ -7,7 +7,7 @@ public class Conexão {
 	public static java.sql.Connection faz_conexão() throws SQLException {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			return DriverManager.getConnection("jdbc:mysql://localhost/tainhaclickerdb?useSSL=false", "root", "root");
+			return DriverManager.getConnection("jdbc:mysql://localhost:3306/tainhaclickerdb?useSSL=false", "root", "root");
 		} catch (ClassNotFoundException e) {
 			throw new SQLException(e.getException());
 		}

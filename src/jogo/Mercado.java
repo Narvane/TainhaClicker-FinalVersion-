@@ -1,9 +1,11 @@
 package jogo;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+
+import views.ViewGame;
 
 public class Mercado {
 	private ArrayList<Vara> VarasDoMercado;
@@ -23,6 +25,24 @@ public class Mercado {
 		varadao.logarVarasDoJogo(VarasDoMercado);
 		molinetedao.logarMolinetesDoJogo(MolinetesDoMercado);
 		iscadao.logarIscasDoJogo(IscasDoMercado);
+		
+		VarasDoMercado.get(0).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/VaraBambooMini.png")));
+		VarasDoMercado.get(1).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/VaraFerroMini.png")));
+		//VarasDoMercado.get(2).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/Angelmini.png")));
+		//VarasDoMercado.get(3).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/gladiusmini.png")));
+		//VarasDoMercado.get(4).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/Aquariusmini.png")));
+		
+		MolinetesDoMercado.get(0).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/DaywaBG4500Mini.png")));
+		//MolinetesDoMercado.get(1).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/Crossfiremini2.png")));
+		//MolinetesDoMercado.get(2).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/shimanomini.png")));
+		//MolinetesDoMercado.get(3).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/maururedmini.png")));
+		//MolinetesDoMercado.get(4).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/canárioazulmini.png")));
+		
+		//IscasDoMercado.get(0).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/pãomini.png")));
+		//IscasDoMercado.get(1).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/minhocamini.png")));
+		//IscasDoMercado.get(2).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/grilosmini.png")));
+		//IscasDoMercado.get(3).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/Peixinhosmini.gif")));
+		//IscasDoMercado.get(4).setMiniatura(new ImageIcon(ViewGame.class.getResource("/Imagens/Camarãomini.png")));
 	}
 	//Metodos principais
 	
@@ -51,12 +71,12 @@ public class Mercado {
 		}
 	}
 	public void Vender() {
-		if (Cliente.getSambura().QuantidadePeixe() != 0) {
-			for(int i = 0; i<Cliente.getSambura().QuantidadePeixe();i++) {
-				Cliente.setDinheiro(Cliente.getDinheiro() + Cliente.getSambura().GetPeixe(i).getPreco());
+		if (Cliente.getBalaio().QuantidadePeixe() != 0) {
+			for(int i = 0; i<Cliente.getBalaio().QuantidadePeixe();i++) {
+				Cliente.setDinheiro(Cliente.getDinheiro() + Cliente.getBalaio().GetPeixe(i).getPreco());
 			}
-			for(int j = 0; j<Cliente.getSambura().QuantidadePeixe();j++) {
-				Cliente.getSambura().RemoveAll(Cliente.getSambura().GetPeixe(j));
+			for(int j = 0; j<Cliente.getBalaio().QuantidadePeixe();j++) {
+				Cliente.getBalaio().RemoveAll(Cliente.getBalaio().GetPeixe(j));
 				}
 		}else {
 			JOptionPane.showMessageDialog(null, "Samburá vazio!");

@@ -1,13 +1,11 @@
 package jogo;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
 
 import connection.Conexão;
 
@@ -59,9 +57,9 @@ private Connection conexao;
 				p.setNome(rs.getString("NomePescador"));
 				p.setDinheiro(rs.getDouble("Dinheiro"));
 				p.setScore(rs.getInt("Score"));
-				p.getSambura().setIdSambura(rs.getInt("idBalaio"));
-				p.getSambura().setEspaco(rs.getInt("espaco"));
-				p.getSambura().setPreço(rs.getDouble("precodeupgrade"));
+				p.getBalaio().setIdBalaio(rs.getInt("idBalaio"));
+				p.getBalaio().setEspaco(rs.getInt("espaco"));
+				p.getBalaio().setPreço(rs.getDouble("precodeupgrade"));
 				p.getXpBar().setXp1(rs.getInt("xp1"));
 				p.getXpBar().setXp2(rs.getInt("xp2"));
 				p.setEquips(rs.getInt("idItems"));
@@ -119,13 +117,13 @@ private Connection conexao;
 		try {
 			conexao = Conexão.faz_conexão();
 			PreparedStatement stmt = conexao.prepareStatement(sql);
-			stmt.setInt(1, p.getSambura().getIdSambura());
+			stmt.setInt(1, p.getBalaio().getIdBalaio());
 			ResultSet rs = stmt.executeQuery();
 			
 			while(rs.next()) {
 				for (int i = 0; i < peixesDoMundo.size(); i++) {
 					if(peixesDoMundo.get(i).getIdPeixe() == rs.getInt("idPeixe")) {
-						p.getSambura().AddPeixe(peixesDoMundo.get(i));
+						p.getBalaio().AddPeixe(peixesDoMundo.get(i));
 					}
 				}
 			}
@@ -142,13 +140,13 @@ private Connection conexao;
 			try {
 				conexao = Conexão.faz_conexão();
 				PreparedStatement stmt = conexao.prepareStatement(sql);
-				stmt.setInt(1, p.getSambura().getIdSambura());
+				stmt.setInt(1, p.getBalaio().getIdBalaio());
 				stmt.executeUpdate();
 				
 				PreparedStatement stmt2 = conexao.prepareStatement(sql2);
-			for (int i = 0; i < p.getSambura().QuantidadePeixe(); i++) {
-				stmt2.setInt(1, p.getSambura().getIdSambura());
-				stmt2.setInt(2, p.getSambura().GetPeixe(i).getIdPeixe());
+			for (int i = 0; i < p.getBalaio().QuantidadePeixe(); i++) {
+				stmt2.setInt(1, p.getBalaio().getIdBalaio());
+				stmt2.setInt(2, p.getBalaio().GetPeixe(i).getIdPeixe());
 				stmt2.executeUpdate();
 			}
 			stmt.close();
@@ -168,8 +166,8 @@ private Connection conexao;
 			stmt.setInt(8, p.getId());
 			stmt.setDouble(1, p.getDinheiro());
 			stmt.setInt(2, p.getPraiaAtual().getId());
-			stmt.setInt(3, p.getSambura().getEspaco());
-			stmt.setDouble(4, p.getSambura().getPreco());
+			stmt.setInt(3, p.getBalaio().getEspaco());
+			stmt.setDouble(4, p.getBalaio().getPreco());
 			stmt.setInt(5, p.getXpBar().getXp1());
 			stmt.setInt(6, p.getXpBar().getXp2());
 			stmt.setInt(7, p.getScore());

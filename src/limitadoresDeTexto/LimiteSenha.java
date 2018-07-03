@@ -35,7 +35,7 @@ String caracteres="´~^]}´`.,;:/?|'+=-*à, è, ì, ò, ù,\r\n" +
 		"Á,É,Í,Ó,Ú,Ýâ, ê, î, ô, û\r\n" + 
 		"Â, Ê, Î, Ô, Û ã, ñ, õ\r\n" + 
 		"Ã, Ñ, Õä, ë, ï, ö, ü, ÿ,\r\n" + 
-		"Ä, Ë, Ï, Ö, Ü, Ÿ å, Å æ, Æ œ, Œ ç, Ç ð, Ð ø, Ø ¿ QWERTYUIOPÇLKJHGFDSAZXCVBNM<> \"";// lista de caracters que não devem ser aceitos
+		"Ä, Ë, Ï, Ö, Ü, Ÿ å, Å æ, Æ œ, Œ ç, Ç ð, Ð ø, Ø ¿ <> \"";// lista de caracters que não devem ser aceitos
 if(caracteres.contains(evt.getKeyChar()+"")){// se o character que gerou o evento estiver na lista
 evt.consume();//aciona esse propriedade para eliminar a ação do evento
 }

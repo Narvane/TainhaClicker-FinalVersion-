@@ -1,6 +1,5 @@
 package jogo;
 
-import java.util.Random;
 import javax.swing.JOptionPane;
 
 public class Pescador {
@@ -10,7 +9,7 @@ public class Pescador {
 	private Molinete molinete;
 	private Isca isca;
 	private int Score;
-	private Sambura sambura;
+	private Balaio balaio;
 	private String Senha;
 	private Praia praiaAtual;
 	private XpBar XpBar;
@@ -21,7 +20,7 @@ public class Pescador {
 	
 	//Construtor
 	public Pescador() {
-		this.sambura = new Sambura();
+		this.balaio = new Balaio();
 		this.XpBar = new XpBar();
 		this.vara = new Vara();
 		this.molinete = new Molinete();
@@ -44,8 +43,8 @@ public class Pescador {
 		}
 	}
 	public void PegarPeixe() {
-		sambura.AddPeixe(mao);
-		if (sambura.getEspaco() != sambura.QuantidadePeixe()) {
+		balaio.AddPeixe(mao);
+		if (balaio.getEspaco() != balaio.QuantidadePeixe()) {
 			Score = Score + 1;
 			this.XpBar.GanharXP(5);
 		}
@@ -56,12 +55,12 @@ public class Pescador {
 	}
 	
 	public void AprimorarSambura() {
-		if (Dinheiro >= sambura.getPreco()) {
-			this.Dinheiro = Dinheiro - sambura.getPreco();
-			this.sambura.setEspaco(sambura.getEspaco()*2);
-			this.sambura.setPreço(sambura.getPreco()*2);
+		if (Dinheiro >= balaio.getPreco()) {
+			this.Dinheiro = Dinheiro - balaio.getPreco();
+			this.balaio.setEspaco(balaio.getEspaco()*2);
+			this.balaio.setPreço(balaio.getPreco()*2);
 		}else {
-			JOptionPane.showMessageDialog(null, "Dinheiro Insuficiente! É necessário :"+ sambura.getPreco() +" R$");
+			JOptionPane.showMessageDialog(null, "Dinheiro Insuficiente! É necessário :"+ balaio.getPreco() +" R$");
 		}
 	}
 
@@ -70,11 +69,11 @@ public class Pescador {
 	public String getSenha() {
 		return Senha;
 	}
-	public Sambura getSambura() {
-		return sambura;
+	public Balaio getBalaio() {
+		return balaio;
 	}
-	public void setSambura(Sambura sambura) {
-		this.sambura = sambura;
+	public void setSambura(Balaio balaio) {
+		this.balaio = balaio;
 	}
 	public XpBar getXpBar() {
 		return XpBar;

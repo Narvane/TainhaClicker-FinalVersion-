@@ -8,7 +8,6 @@ import javax.swing.border.EmptyBorder;
 
 import jogo.Mercado;
 import jogo.Mundo;
-import jogo.MundoDAO;
 import jogo.Pescador;
 import jogo.PescadorDAO;
 import limitadoresDeTexto.LimiteLetras;
@@ -23,10 +22,13 @@ import javax.swing.JButton;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
+
 import java.util.Arrays;
 import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
 
+
+@SuppressWarnings("serial")
 public class ViewLogin extends JFrame {
 
 	private JPanel contentPane;
@@ -36,6 +38,7 @@ public class ViewLogin extends JFrame {
 	private JPasswordField cadPassField;
 	private JPasswordField cfCadPassField;
 
+	
 	/**
 	 * Launch the application.
 	 */
@@ -56,12 +59,14 @@ public class ViewLogin extends JFrame {
 	 * Create the frame.
 	 */
 	public ViewLogin() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 693, 408);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+		setTitle("TainhaClicker");
 		
 		try {
 			for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
@@ -94,6 +99,7 @@ public class ViewLogin extends JFrame {
 		
 		JButton btnLogar = new JButton("Logar");
 		btnLogar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				Pescador Pescador = new Pescador();
 				Mercado Mercado = new Mercado();
@@ -147,6 +153,7 @@ public class ViewLogin extends JFrame {
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent arg0) {
 				Mundo Jogo = new Mundo();
 				Jogo.Pescador.setNome(cadTextField.getText());
@@ -179,7 +186,9 @@ public class ViewLogin extends JFrame {
 		lblCfCadSenha.setBounds(41, 179, 158, 14);
 		panel_1.add(lblCfCadSenha);
 		
+		
 		JLabel ImagemLogin = new JLabel("");
+		ImagemLogin.setIcon(new ImageIcon(ViewLogin.class.getResource("/Imagens/DanielaPraia.png")));
 		ImagemLogin.setBounds(0, 0, 366, 369);
 		contentPane.add(ImagemLogin);
 	}
